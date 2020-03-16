@@ -1,30 +1,31 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using InterfaceComparativa.Entities;
 
 namespace InterfaceComparativa {
     class Program {
         static void Main(string[] args) {
             //mapeando o caminho do arquivo
-            string path = @"c:\temp\in.txt";
+            string path = @"c:\temp\in.csv";
             //bloco try/catch
             try {
                 //abrir o arquivo usando o StreamReader
                 using (StreamReader sr = File.OpenText(path)) {
-                    //instanciando uma lista do tipo string
-                    List<string> list = new List<string>();
+                    //instanciando uma lista do tipo Funcionario
+                    List<Funcionario> list = new List<Funcionario>();
                     //enquanto (!sr.EndOfStream) for diferente do fim, 
                     while (!sr.EndOfStream) {
-                        //chama a lista e coloca dentro do add, tudo que 
-                        //ler dentro desse arquivo.
-                        list.Add(sr.ReadLine());
+                        //chama a lista e coloca dentro do add, para
+                        //cada item da lista, ela adiciona dentro de funcionario.
+                        list.Add(new Funcionario(sr.ReadLine()));
                     }
                     //ordena a lista em ordem alfabetica!
                     list.Sort();
                     //para cada string na minha lista
-                    foreach (string str in list) {
+                    foreach (Funcionario funcionario in list) {
                         //vai imprimir na tela
-                        Console.WriteLine(str);
+                        Console.WriteLine(funcionario);
                     }
                 }
             }
